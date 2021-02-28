@@ -1,0 +1,82 @@
+[
+    {
+        "id": 609862,
+        "name": "Atyraū Oblysy",
+        "state": "",
+        "country": "KZ",
+        "coord": {
+            "lon": 52.0,
+            "lat": 47.0
+        }
+    },
+    {
+        "id": 609798,
+        "name": "Inderbor",
+        "state": "",
+        "country": "KZ",
+        "coord": {
+            "lon": 51.783329,
+            "lat": 48.549999
+        }
+    },
+    {
+        "id": 607847,
+        "name": "West Kazakhstan",
+        "state": "",
+        "country": "KZ",
+        "coord": {
+            "lon": 50.0,
+            "lat": 50.0
+        }
+    },
+    {
+        "id": 1526273,
+        "name": "Nur-Sultan",
+        "state": "",
+        "country": "KZ",
+        "coord": {
+            "lon": 71.445976,
+            "lat": 51.180099
+        }
+    },
+    {
+        "id": 2761369,
+        "name": "Vienna",
+        "state": "",
+        "country": "AT",
+        "coord": {
+            "lon": 16.37208,
+            "lat": 48.208488
+        }
+    },
+    {
+        "id": 6173331,
+        "name": "Vancouver",
+        "state": "",
+        "country": "CA",
+        "coord": {
+            "lon": -123.119339,
+            "lat": 49.24966
+        }
+    },
+    {
+        "id": 146384,
+        "name": "Limassol",
+        "state": "",
+        "country": "CY",
+        "coord": {
+            "lon": 33.033329,
+            "lat": 34.674999
+        }
+    },
+    {
+        "id": 146400,
+        "name": "Larnaca",
+        "state": "",
+        "country": "CY",
+        "coord": {
+            "lon": 33.629169,
+            "lat": 34.916672
+        }
+    }
+]
