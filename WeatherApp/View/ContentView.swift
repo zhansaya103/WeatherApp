@@ -16,16 +16,19 @@ struct ContentView: View {
     @ObservedObject var weatherListModel = WeatherListModel()
     @State var weatherInfos = [WeatherInfo]()
     @State var currentCityId = 0
-    
+    var userLocation: CLLocationCoordinate2D?
    
-    init() {
+    init(userLocation: CLLocationCoordinate2D?) {
         print("ContentView init")
-        let predicate = NSPredicate(format: "isFeatured = %@", argumentArray: [true])
+        self.userLocation = userLocation
+        let predicate = NSPredicate(format: "isFeatured = %@ OR longitude = %@", argumentArray: [true, self.userLocation?.longitude ?? 0])
+        print("User's location: \(String(describing: self.userLocation ?? nil))")
         let request = City.fetchRequest(predicate: predicate)
         _cities = FetchRequest(fetchRequest: request)
     }
 
     var body: some View {
+        
         Group {
             if !isList && weatherInfos.count > 0 {
                 WeatherPageView(isList: $isList, weatherInfos: $weatherInfos, currentCityId: $currentCityId)
@@ -34,6 +37,8 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            print("ON APPEAR: ContentView")
+            
             weatherListModel.load(cities: cities.map { city in city as City }) { success in
                 print(success)
             }
@@ -44,16 +49,35 @@ struct ContentView: View {
             }
             
             _ = Timer.scheduledTimer(timeInterval: 900, target: weatherListModel, selector: #selector(WeatherListModel.load(timer:)), userInfo: ["cities": cities.map { city in city as City }], repeats: true)
+            
         }
         .onChange(of: cities.filter({city in city.isFeatured}), perform: { value in
-            print("Value 'isFeatured' has changed")
+            print("HAS CHANGED:'isFeatured'")
             print("EXECUTED: weatherListModel.loadFromCache")
             weatherListModel.loadFromCache(cities: cities.map { city in city as City })
             print("weatherInfos.count after city.isFeatured had changed: \(weatherInfos.count)")
         })
         .onChange(of: weatherListModel.weatherInfoList.count, perform: { value in
+            print("HAS CHANGED: weatherListModel.weatherInfoList.count")
             weatherInfos = weatherListModel.weatherInfoList
         })
+        .onChange(of: weatherListModel.weatherInfoList.last?.current.dt, perform: { value in
+            guard let dt = value else { return }
+            let current = Date().timeIntervalSince1970
+            if abs(current - Double(dt)) > 600 {
+                print("HAS CHANGED: weatherListModel.weatherInfoList.first?.current.dt")
+                weatherListModel.loadFromCache(cities: cities.map { city in city as City })
+            }
+        })
+        .onChange(of: userLocation?.longitude, perform: { value in
+            print("HAS CHANGED: userLocation?.longitude - \(String(describing: value))")
+            if let userLongitude = value  {
+                let usersCity = cities.first(where: { city in city.longitude == userLongitude})
+                print("User's City: \(usersCity?.cityName ?? "nil")")
+                usersCity?.addToUsersList(context: context)
+            }
+        })
+        
     }
 }
 
@@ -61,6 +85,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(userLocation: nil).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

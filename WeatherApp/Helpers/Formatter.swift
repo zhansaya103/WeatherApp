@@ -30,6 +30,9 @@ struct Formatter {
     static var fontLight20: Font {
         Font.system(size: 20, weight: .light, design: .default)
     }
+    static var fontLight15: Font {
+        Font.system(size: 15, weight: .light, design: .default)
+    }
     
     
     
@@ -44,11 +47,15 @@ struct Formatter {
                 imageName = "cloud.bolt.rain.fill"
             case "Drizzle":
                 imageName = "cloud.drizzle.fill"
+            case "Shower Rain":
+                imageName = "cloud.sun.rain.fill"
             case "Rain":
                 imageName = "cloud.rain.fill"
             case "Snow":
                 imageName = "cloud.snow.fill"
-            case "Clouds":
+            case "Broken Clouds" :
+                imageName = "cloud.fill"
+            case "Clouds", "Few Clouds", "Scattered Clouds":
                 imageName = "cloud.sun.fill"
             case "Mist":
                 imageName = "cloud.fog.fill"
@@ -67,6 +74,30 @@ struct Formatter {
     
     static func setTemp(_ temp: Double) -> String {
         return String(format: "%.0f°", temp)
+    }
+    
+    // MARK: set UV Index
+    static func setIndex(_ temp: Double) -> String {
+        return String(format: "%.0f", temp)
+    }
+    
+    static func getUVIndexRange(_ index: Int) -> String {
+        var description: String
+            switch index {
+            case 0, 1, 2:
+                description = "LOW"
+            case 3, 4, 5:
+                description = "MODERATE"
+            case 6, 7:
+                description = "High"
+            case 8, 9:
+                description = "Very High"
+           
+            
+        default:
+            description = "Extreme"
+            }
+        return description
     }
     
     // MARK: set Time
@@ -149,3 +180,23 @@ fileprivate func setWeekdayName(weekShortName: String) -> String {
         }
     return weekday
 }
+
+func getUVIndexRange(index: Int) -> String {
+    var description: String
+        switch index {
+        case 0, 1, 2:
+            description = "Low"
+        case 3, 4, 5:
+            description = "Moderate"
+        case 6, 7:
+            description = "High"
+        case 8, 9:
+            description = "Very High"
+       
+        
+    default:
+        description = "Extreme"
+        }
+    return description
+}
+

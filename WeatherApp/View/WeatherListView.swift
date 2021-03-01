@@ -7,12 +7,13 @@
 
 import SwiftUI
 import CoreLocation
+import UIKit
 
 struct WeatherListView: View {
     @Binding var isList: Bool
     @Binding var weatherInfos: [WeatherInfo]
     var cities: FetchedResults<City>
-    @State private var addingCity: Bool = false
+    @State var addingCity: Bool = false
     @Binding var currentCityId: Int
     @Environment(\.managedObjectContext) var context
     
@@ -26,25 +27,32 @@ struct WeatherListView: View {
                             print("currentCityId: \(currentCityId)")
                                 isList.toggle()
                         }) {
-                            HStack(alignment: .center, spacing: geometry.size.width / 3) {
+                            HStack(alignment: .center, spacing: geometry.size.width / 6) {
                                 VStack(alignment: .leading) {
                                     Text(Formatter.setHmm(date: Date(), seconds: weatherInfo.timezone_offset)).font(Formatter.fontLight20)
                                     Text("\(weatherInfo.cityName)").font(Formatter.fontLight35)
                                 }
-                                .frame(width: .none, height: geometry.size.height / 10, alignment: .leading)
+                                .frame(width: geometry.size.width * 1 / 3, height: geometry.size.height / 10, alignment: .leading)
+                                HStack {
+                                    Image(systemName: Formatter.setImageName(weatherInfo.current.weather.description.capitalized) )
+                                        .renderingMode(.original)
+                                        .frame(width: geometry.size.width * 0.20, height: geometry.size.width * 0.20, alignment: .trailing)
+                                        .font(Formatter.fontLight35)
+                                    Text(Formatter.setTemp(weatherInfo.current.temp)).font(Formatter.fontLight45)
+                                        .frame(width: geometry.size.width * 0.20, height: geometry.size.height / 10, alignment: .trailing)
+                                }
                                 
-                                Text(Formatter.setTemp(weatherInfo.current.temp)).font(Formatter.fontLight45)
-                                    .frame(width: .none, height: geometry.size.height / 10, alignment: .trailing)
                             }
+                            .frame(height: 70, alignment: .leading)
                         }
                         .font(Formatter.fontLight20)
-                        
                     }
                     .onDelete(perform: withAnimation {deleteCity(at:) } )
-                    .listRowBackground(LinearGradient(gradient: Gradient(colors: [Color("mildGray"),  Color("darkSkyBlue")]), startPoint: .leading, endPoint: .topTrailing))
+                    .listRowBackground(Color(.gray).opacity(0.3))
                     .foregroundColor(.white).opacity(0.8)
                     .edgesIgnoringSafeArea(.top)
                 }
+                .background(LinearGradient(gradient: Gradient(colors: [Color("darkSkyBlue"), Color("mildGray")]), startPoint: .topLeading, endPoint: .bottomLeading))
                 .layoutPriority(1)
                 .sheet(isPresented: $addingCity) {
                     withAnimation {
@@ -53,25 +61,17 @@ struct WeatherListView: View {
                     }
                 }
                 .onAppear {
+                    UITableView.appearance().backgroundColor = .clear
+                    UITableViewCell.appearance().backgroundColor = .clear
                     print("WeatherInfos count before adding: \(weatherInfos.count)")
                 }
                 .onDisappear {
                     print("WeatherInfos count after adding: \(weatherInfos.count)")
                 }
                 .border(Color.gray)
-                
-                HStack(alignment: .top) {
-                    Button(action: {
-                        withAnimation {
-                            addingCity.toggle()
-                        }
-                    }) {
-                        Image(systemName: "plus.circle")
-                    }
-                    .foregroundColor(Color(.gray))
-                    .font(Formatter.fontLight30)
-                    .padding()
-                }.offset(x: geometry.size.width * 0.40, y: -350)
+                TabView(isList: $isList, numberOfPages: weatherInfos.count, currentPage: $currentCityId, addingCity: $addingCity)
+                    .position(x: geometry.size.width / 2, y: (80 * CGFloat(weatherInfos.count + 1)))
+               
                 
             }
             .ignoresSafeArea([.all])

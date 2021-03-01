@@ -1,5 +1,16 @@
 [
     {
+        "id": 1850147,
+        "name": "Tokyo",
+        "state": "",
+        "country": "JP",
+        "coord": {
+            "lon": 139.7753269,
+            "lat": 35.7020691
+        }
+    },
+    
+    {
         "id": 609862,
         "name": "Atyraū Oblysy",
         "state": "",

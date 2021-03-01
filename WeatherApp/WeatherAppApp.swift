@@ -12,15 +12,17 @@ import CoreLocation
 struct WeatherAppApp: App {
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
-
+    let locationFetcher = LocationFetcher()
     init() {
         print("App init")
         loadCityList()
         print("Cities loaded to Core Data")
+        
+        getUserLocation()
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(userLocation: locationFetcher.lastKnownLocation)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { newScenePhase in
@@ -31,6 +33,7 @@ struct WeatherAppApp: App {
                 print("App State: Inactive")
             case .active:
                 print("App State: Active")
+                getUserLocation()
             @unknown default:
                 print("App State: Unknown")
             }
@@ -44,8 +47,12 @@ struct WeatherAppApp: App {
             
         }
     }
-    
     func getUserLocation() {
+        locationFetcher.start()
+        print("LOCATION: lat - \(String(describing: locationFetcher.lastKnownLocation?.latitude))")  //MOSCOW: 55.755786   TOKYO: 35.7020691
+        print("LOCATION: lon - \(String(describing: locationFetcher.lastKnownLocation?.longitude))") //MOSCOW: 37.617633   TOKYO: 139.7753269
+    }
+   /* func getUserLocation() {
         let locationManager = LocationManager()
         var lon = 0.0
         var lat = 0.0
@@ -57,5 +64,5 @@ struct WeatherAppApp: App {
             UserDefaults.standard.setValue(userLocation, forKey: "userLocation")
         }
         
-    }
+    } */
 }

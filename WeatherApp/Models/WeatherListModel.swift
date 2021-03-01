@@ -11,7 +11,9 @@ class WeatherListModel: ObservableObject {
     @Published var weatherInfoList = [WeatherInfo]()
     
     func loadFromCache(cities: [City]) {
+        weatherInfoList.removeAll()
         print("EXECUTED: loadFromCache(cities: [City])")
+        //print("First City: \(cities[0].cityName)")
         var weatherInfoListCopy = [WeatherInfo]()
         for city in cities {
             if let weatherInfo = PersistencyManager.shared.getCityWeatherInfo(filename: FileNamePrefixes.weatherInfo + "\(city.ident)") {
@@ -20,8 +22,9 @@ class WeatherListModel: ObservableObject {
                 
                 let task = WeatherServiceClient().load(city: city, success: { weatherInfo in
                     
-                    self.weatherInfoList.append(weatherInfo)
-                    
+                    if !self.weatherInfoList.contains(where: { city in city.cityName == weatherInfo.cityName}) {
+                        self.weatherInfoList.append(weatherInfo)
+                    }
                     print("Success: weatherInfoListCopy count: \(weatherInfoListCopy.count)")
                     print("Success: weatherInfoList count: \(self.weatherInfoList.count)")
                 })

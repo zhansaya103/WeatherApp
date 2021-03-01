@@ -29,7 +29,7 @@ enum APIKeys {
 struct WeatherServiceClient {
     
     func load(city: City, success: @escaping (WeatherInfo) -> ()) -> URLSessionTask {
-        print("EXECUTED: WeatherServiceClient func: load(city: City, success: @escaping (WeatherInfo) -> ())")
+        print("EXECUTED: WeatherServiceClient func: load(city: \(city.cityName), success: @escaping (WeatherInfo) -> ())")
         let lon = city.longitude
         let lat = city.latitude
         let cityName = city.name!
@@ -109,10 +109,12 @@ struct WeatherServiceClient {
                 weatherInfo.timezone_offset = weatherInfoCopy.timezone_offset
                 weatherInfo.current.sunset = weatherInfoCopy.current!["sunset"] as! Int
                 weatherInfo.current.sunrise = weatherInfoCopy.current!["sunrise"] as! Int
+                weatherInfo.current.uvi = weatherInfoCopy.current!["uvi"] as! Double
                 let currWeather = weatherInfoCopy.current!["weather"] as! [[String : Any]]
                 weatherInfo.current.weather.description = currWeather[0]["description"] as! String
                 weatherInfo.current.weather.main = currWeather[0]["main"] as! String
                 weatherInfo.current.weather.icon = currWeather[0]["icon"] as! String
+                
                 var hourly = [CurrentWeather]()
                 let hourlyCopy = weatherInfoCopy.hourly!
                 for info in hourlyCopy {
