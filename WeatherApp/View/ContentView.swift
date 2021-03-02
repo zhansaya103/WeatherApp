@@ -21,10 +21,11 @@ struct ContentView: View {
     init(userLocation: CLLocationCoordinate2D?) {
         print("ContentView init")
         self.userLocation = userLocation
-        let predicate = NSPredicate(format: "isFeatured = %@ OR longitude = %@", argumentArray: [true, self.userLocation?.longitude ?? 0])
-        print("User's location: \(String(describing: self.userLocation ?? nil))")
+        let predicate = NSPredicate(format: "isFeatured = %@ OR (longitude = %@ AND latitude = %@)", argumentArray: [true, Double(round(self.userLocation?.longitude ?? 0)), Double(round(self.userLocation?.latitude ?? 0))])
+        print("User's location: lat: \(String(describing: Double(round(self.userLocation?.latitude ?? 0)))) lon: \(String(describing: Double(round(self.userLocation?.longitude ?? 0))))")
         let request = City.fetchRequest(predicate: predicate)
         _cities = FetchRequest(fetchRequest: request)
+        
     }
 
     var body: some View {
@@ -64,7 +65,7 @@ struct ContentView: View {
         .onChange(of: weatherListModel.weatherInfoList.last?.current.dt, perform: { value in
             guard let dt = value else { return }
             let current = Date().timeIntervalSince1970
-            if abs(current - Double(dt)) > 600 {
+            if abs(current - Double(dt)) > 180 {
                 print("HAS CHANGED: weatherListModel.weatherInfoList.first?.current.dt")
                 weatherListModel.loadFromCache(cities: cities.map { city in city as City })
             }
@@ -72,7 +73,7 @@ struct ContentView: View {
         .onChange(of: userLocation?.longitude, perform: { value in
             print("HAS CHANGED: userLocation?.longitude - \(String(describing: value))")
             if let userLongitude = value  {
-                let usersCity = cities.first(where: { city in city.longitude == userLongitude})
+                let usersCity = cities.first(where: { city in city.longitude == Double(round(userLongitude))})
                 print("User's City: \(usersCity?.cityName ?? "nil")")
                 usersCity?.addToUsersList(context: context)
             }

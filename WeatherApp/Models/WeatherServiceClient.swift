@@ -22,9 +22,6 @@ enum URLExcludeData {
     static let alerts = "alerts"
 }
 
-enum APIKeys {
-    static let myKey = "89c207880b6e57574dbddd2be200eaf7"
-}
 
 struct WeatherServiceClient {
     
@@ -47,6 +44,7 @@ struct WeatherServiceClient {
         }
         
         //let urll = "https://api.openweathermap.org/data/2.5/onecall?lat=49.24966&lon=-123.119339&units=metric&exclude=minutely&appid=89c207880b6e57574dbddd2be200eaf7"
+        //let urll = "https://api.openweathermap.org/data/2.5/onecall?lat=52.0&lon=-0.0&units=metric&exclude=minutely&appid=89c207880b6e57574dbddd2be200eaf7"
        
         return URLSession.shared.dataTask(with: URL(string: url)!) {(data, response, error) in
             var weatherInfoCopy = WeatherInfoByCoord()
@@ -100,8 +98,8 @@ struct WeatherServiceClient {
                                     icon: ""),
                                 uvi: 0)])
                 
-                weatherInfo.coord.lat = weatherInfoCopy.lat
-                weatherInfo.coord.lon = weatherInfoCopy.lon
+                weatherInfo.coord.lat = Double(round(weatherInfoCopy.lat))
+                weatherInfo.coord.lon = Double(round(weatherInfoCopy.lon))
                 weatherInfo.current.dt = weatherInfoCopy.current!["dt"] as! Int
                 weatherInfo.current.temp = weatherInfoCopy.current!["temp"] as! Double
                 weatherInfo.current.feels_like = weatherInfoCopy.current!["feels_like"] as! Double

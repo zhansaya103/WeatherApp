@@ -13,7 +13,6 @@ class WeatherListModel: ObservableObject {
     func loadFromCache(cities: [City]) {
         weatherInfoList.removeAll()
         print("EXECUTED: loadFromCache(cities: [City])")
-        //print("First City: \(cities[0].cityName)")
         var weatherInfoListCopy = [WeatherInfo]()
         for city in cities {
             if let weatherInfo = PersistencyManager.shared.getCityWeatherInfo(filename: FileNamePrefixes.weatherInfo + "\(city.ident)") {

@@ -42,8 +42,8 @@ extension City {
                 city.ident = Int32(info.id)
                 city.name = info.name
                 city.country = info.country
-                city.longitude = info.coord.lon
-                city.latitude = info.coord.lat
+                city.longitude = Double(round(info.coord.lon))
+                city.latitude = Double(round(info.coord.lat))
                 city.isFeatured = false
                 print("\(city.cityName) is loaded to Core Data")
             }

@@ -33,6 +33,8 @@
 		5884B5F725E5EC61004C2161 /* CityInfoListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884B5F625E5EC61004C2161 /* CityInfoListManager.swift */; };
 		5884B5FA25E5F090004C2161 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5884B5F925E5F090004C2161 /* City.swift */; };
 		5884B5FE25E5FC34004C2161 /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 5884B5FD25E5FC34004C2161 /* city.list.json */; };
+		58AA1C4825EDFCFA005B98E6 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA1C4725EDFCFA005B98E6 /* TabView.swift */; };
+		58AA1C4D25EDFE97005B98E6 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA1C4C25EDFE97005B98E6 /* APIKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		5884B5F625E5EC61004C2161 /* CityInfoListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInfoListManager.swift; sourceTree = "<group>"; };
 		5884B5F925E5F090004C2161 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		5884B5FD25E5FC34004C2161 /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
+		58AA1C4725EDFCFA005B98E6 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		58AA1C4C25EDFE97005B98E6 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 			children = (
 				584FE79E25E70BFA007BA5BF /* String+Extension.swift */,
 				584FE7AE25E853CE007BA5BF /* Formatter.swift */,
+				58AA1C4C25EDFE97005B98E6 /* APIKeys.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -130,14 +135,13 @@
 		5884B5DA25E5CE9A004C2161 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				58AA1C4A25EDFE08005B98E6 /* WeatherView */,
 				5884B5E625E5D237004C2161 /* PageView */,
 				5884B5C725E5CBE1004C2161 /* ContentView.swift */,
-				5884B5E025E5CEE3004C2161 /* WeatherListView.swift */,
-				5884B5E325E5CEF3004C2161 /* WeatherPageView.swift */,
 				584FE78E25E6D545007BA5BF /* AddCityView.swift */,
 				584FE79125E6D82B007BA5BF /* SearchBar.swift */,
-				584FE79425E6EAB3007BA5BF /* WeatherView.swift */,
 				584FE7B525E98C6F007BA5BF /* SafariView.swift */,
+				58AA1C4725EDFCFA005B98E6 /* TabView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -173,6 +177,16 @@
 				5884B5FD25E5FC34004C2161 /* city.list.json */,
 			);
 			path = ResourcesAdditional;
+			sourceTree = "<group>";
+		};
+		58AA1C4A25EDFE08005B98E6 /* WeatherView */ = {
+			isa = PBXGroup;
+			children = (
+				584FE79425E6EAB3007BA5BF /* WeatherView.swift */,
+				5884B5E325E5CEF3004C2161 /* WeatherPageView.swift */,
+				5884B5E025E5CEE3004C2161 /* WeatherListView.swift */,
+			);
+			path = WeatherView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5884B5F725E5EC61004C2161 /* CityInfoListManager.swift in Sources */,
+				58AA1C4D25EDFE97005B98E6 /* APIKeys.swift in Sources */,
 				584FE79B25E70804007BA5BF /* WeatherServiceClient.swift in Sources */,
 				584FE7A425E71462007BA5BF /* WeatherListModel.swift in Sources */,
 				5884B5D225E5CBE2004C2161 /* WeatherApp.xcdatamodeld in Sources */,
@@ -255,6 +270,7 @@
 				5884B5E825E5D26A004C2161 /* PageViewController.swift in Sources */,
 				5884B5F325E5EAD4004C2161 /* CityInfo.swift in Sources */,
 				5884B5EC25E5D29D004C2161 /* PageControl.swift in Sources */,
+				58AA1C4825EDFCFA005B98E6 /* TabView.swift in Sources */,
 				584FE79825E702BE007BA5BF /* WeatherInfo.swift in Sources */,
 				584FE79525E6EAB3007BA5BF /* WeatherView.swift in Sources */,
 				5884B5CF25E5CBE2004C2161 /* Persistence.swift in Sources */,

@@ -21,7 +21,7 @@ struct WeatherListView: View {
         GeometryReader { geometry in
             ZStack {
                 List {
-                    ForEach(weatherInfos, id: \.id) { weatherInfo in
+                    ForEach(weatherInfos, id: \.id) { weatherInfo in //.sorted(by: { wi1, wi2 in wi1.cityName < wi2.cityName })
                         Button(action: {
                             currentCityId = weatherInfo.id
                             print("currentCityId: \(currentCityId)")

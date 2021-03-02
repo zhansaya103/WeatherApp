@@ -1,5 +1,266 @@
 [
     {
+        "id": 1819729,
+        "name": "Hong Kong",
+        "state": "",
+        "country": "HK",
+        "coord": {
+            "lon": 114.157692,
+            "lat": 22.285521
+        }
+    },
+    {
+        "id": 2867714,
+        "name": "Munich",
+        "state": "",
+        "country": "DE",
+        "coord": {
+            "lon": 11.57549,
+            "lat": 48.137428
+        }
+    },
+    {
+        "id": 2925533,
+        "name": "Frankfurt am Main",
+        "state": "",
+        "country": "DE",
+        "coord": {
+            "lon": 8.68333,
+            "lat": 50.116669
+        }
+    },
+    {
+        "id": 292968,
+        "name": "Abu Dhabi",
+        "state": "",
+        "country": "AE",
+        "coord": {
+            "lon": 54.366669,
+            "lat": 24.466669
+        }
+    },
+    {
+        "id": 292223,
+        "name": "Dubai",
+        "state": "",
+        "country": "AE",
+        "coord": {
+            "lon": 55.304722,
+            "lat": 25.258169
+        }
+    },
+    {
+        "id": 6174032,
+        "name": "Victoria",
+        "state": "",
+        "country": "CA",
+        "coord": {
+            "lon": -63.48201,
+            "lat": 46.216831
+        }
+    },
+    {
+        "id": 498817,
+        "name": "Saint Petersburg",
+        "state": "",
+        "country": "RU",
+        "coord": {
+            "lon": 30.264168,
+            "lat": 59.894444
+        }
+    },
+    {
+        "id": 3117735,
+        "name": "Madrid",
+        "state": "",
+        "country": "ES",
+        "coord": {
+            "lon": -3.70256,
+            "lat": 40.4165
+        }
+    },
+    {
+        "id": 6542283,
+        "name": "Milano",
+        "state": "",
+        "country": "IT",
+        "coord": {
+            "lon": 9.19199,
+            "lat": 45.464161
+        }
+    },
+    {
+        "id": 6542284,
+        "name": "Venezia",
+        "state": "",
+        "country": "IT",
+        "coord": {
+            "lon": 12.33092,
+            "lat": 45.4389
+        }
+    },
+    {
+        "id": 6455259,
+        "name": "Paris",
+        "state": "",
+        "country": "FR",
+        "coord": {
+            "lon": 2.35236,
+            "lat": 48.856461
+        }
+    },
+    {
+        "id": 3054638,
+        "name": "Budapest",
+        "state": "",
+        "country": "HU",
+        "coord": {
+            "lon": 19.08333,
+            "lat": 47.5
+        }
+    },
+    {
+        "id": 2950158,
+        "name": "Berlin",
+        "state": "",
+        "country": "DE",
+        "coord": {
+            "lon": 10.45,
+            "lat": 54.033329
+        }
+    },
+    
+    {
+        "id": 1816670,
+        "name": "Beijing",
+        "state": "",
+        "country": "CN",
+        "coord": {
+            "lon": 116.397232,
+            "lat": 39.907501
+        }
+    },
+    {
+        "id": 5391959,
+        "name": "San Francisco",
+        "state": "CA",
+        "country": "US",
+        "coord": {
+            "lon": -122.419418,
+            "lat": 37.774929
+        }
+    },
+    {
+        "id": 4350049,
+        "name": "California",
+        "state": "MD",
+        "country": "US",
+        "coord": {
+            "lon": -76.507446,
+            "lat": 38.3004
+        }
+    },
+    {
+        "id": 1528675,
+        "name": "Bishkek",
+        "state": "",
+        "country": "KG",
+        "coord": {
+            "lon": 74.589996,
+            "lat": 42.869999
+        }
+    },
+    {
+        "id": 1526586,
+        "name": "Aktobe",
+        "state": "",
+        "country": "KZ",
+        "coord": {
+            "lon": 70.400002,
+            "lat": 43.466671
+        }
+    },
+    {
+        "id": 1526601,
+        "name": "Aktau",
+        "state": "",
+        "country": "KZ",
+        "coord": {
+            "lon": 72.833328,
+            "lat": 48.033329
+        }
+    },
+    {
+        "id": 1526384,
+        "name": "Almaty",
+        "state": "",
+        "country": "KZ",
+        "coord": {
+            "lon": 76.949997,
+            "lat": 43.25
+        }
+    },
+    {
+        "id": 6094817,
+        "name": "Ottawa",
+        "state": "",
+        "country": "CA",
+        "coord": {
+            "lon": -75.69812,
+            "lat": 45.411171
+        }
+    },
+    {
+        "id": 6167865,
+        "name": "Toronto",
+        "state": "",
+        "country": "CA",
+        "coord": {
+            "lon": -79.416298,
+            "lat": 43.700111
+        }
+    },
+    {
+        "id": 2643743,
+        "name": "London",
+        "state": "",
+        "country": "GB",
+        "coord": {
+            "lon": -0.12574,
+            "lat": 51.50853
+        }
+    },
+    {
+        "id": 5128581,
+        "name": "New York City",
+        "state": "NY",
+        "country": "US",
+        "coord": {
+            "lon": -74.005966,
+            "lat": 40.714272
+        }
+    },
+    {
+        "id": 5202009,
+        "name": "Moscow",
+        "state": "PA",
+        "country": "US",
+        "coord": {
+            "lon": 38.0,
+            "lat": 56.0
+        }
+    },
+    {
+        "id": 554234,
+        "name": "Kaliningrad",
+        "state": "",
+        "country": "RU",
+        "coord": {
+            "lon": 20.51095,
+            "lat": 54.70649
+        }
+    },
+    {
         "id": 1850147,
         "name": "Tokyo",
         "state": "",
