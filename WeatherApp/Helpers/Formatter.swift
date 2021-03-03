@@ -53,9 +53,9 @@ struct Formatter {
                 imageName = "cloud.rain.fill"
             case "Snow":
                 imageName = "cloud.snow.fill"
-            case "Broken Clouds" :
+            case "Overcast Clouds":
                 imageName = "cloud.fill"
-            case "Clouds", "Few Clouds", "Scattered Clouds":
+            case "Clouds", "Few Clouds", "Scattered Clouds", "Broken Clouds":
                 imageName = "cloud.sun.fill"
             case "Mist":
                 imageName = "cloud.fog.fill"
