@@ -120,11 +120,12 @@ struct Formatter {
     }
     
     static func setHmm(date: Date, seconds: Int) -> String {
+        let newDate = date
         let format = DateFormatter()
         let timezone = TimeZone(secondsFromGMT: seconds)
         format.timeZone = timezone
         format.dateFormat = "h:mm a"
-        let dateString = format.string(from: date)
+        let dateString = format.string(from: newDate)
         return dateString
     }
     

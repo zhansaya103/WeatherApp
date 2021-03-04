@@ -18,10 +18,11 @@ struct WeatherListView: View {
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
+        let currentDate = Date()
         GeometryReader { geometry in
             ZStack {
                 List {
-                    ForEach(weatherInfos, id: \.id) { weatherInfo in //.sorted(by: { wi1, wi2 in wi1.cityName < wi2.cityName })
+                    ForEach(weatherInfos, id: \.id) { weatherInfo in
                         Button(action: {
                             currentCityId = weatherInfo.id
                             print("currentCityId: \(currentCityId)")
@@ -29,7 +30,7 @@ struct WeatherListView: View {
                         }) {
                             HStack(alignment: .center, spacing: geometry.size.width / 6) {
                                 VStack(alignment: .leading) {
-                                    Text(Formatter.setHmm(date: Date(), seconds: weatherInfo.timezone_offset)).font(Formatter.fontLight20)
+                                    Text(Formatter.setHmm(date: currentDate, seconds: weatherInfo.timezone_offset)).font(Formatter.fontLight20)
                                     Text("\(weatherInfo.cityName)").font(Formatter.fontLight35)
                                 }
                                 .frame(width: geometry.size.width * 1 / 3, height: geometry.size.height / 10, alignment: .leading)

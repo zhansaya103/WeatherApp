@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WeatherView: View {
     var weatherInfo: WeatherInfo
+    let currentDate = Date()
     var body: some View {
         GeometryReader { geometry in
             List {
@@ -16,7 +17,7 @@ struct WeatherView: View {
                     VStack(spacing: 5) {
                         Group {
                             Text(weatherInfo.cityName).font(Formatter.fontLight40)
-                            Text(Formatter.setHmm(date: Date(), seconds: weatherInfo.timezone_offset)).font(Formatter.fontLight25)
+                            Text(Formatter.setHmm(date: currentDate, seconds: weatherInfo.timezone_offset)).font(Formatter.fontLight25)
                         }
                         Image(systemName: Formatter.setImageName(weatherInfo.current.weather.description.capitalized) )
                             .renderingMode(.original)
