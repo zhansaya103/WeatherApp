@@ -58,8 +58,6 @@ struct WeatherServiceClient {
                     do {
                         let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers)
                         
-                        //print(jsonResult)
-                        
                         if let weatherByCoord = jsonResult as? [String: Any] {
                             
                             weatherInfoCopy.lat = weatherByCoord["lat"] as! Double
@@ -164,7 +162,12 @@ struct WeatherServiceClient {
                 }
                 weatherInfo.hourly = hourly
                 weatherInfo.daily = daily
-                PersistencyManager.shared.saveCityWeatherInfo(data: weatherInfo, filename: FileNamePrefixes.weatherInfo + "\(cityId)")
+                do { try
+                    PersistencyManager.shared.saveCityWeatherInfo(data: weatherInfo, filename: FileNamePrefixes.weatherInfo + "\(cityId)")
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
                 success(weatherInfo)
             }
             

@@ -12,6 +12,11 @@ enum FileNamePrefixes {
     static let weatherInfo = "WeatherInfoForCity-"
 }
 
+enum SaveToCacheError: Error {
+    case encodeFailed
+    case writeToURLFailed
+}
+
 class PersistencyManager {
     static var shared = PersistencyManager()
     
@@ -23,20 +28,20 @@ class PersistencyManager {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
     }
     
-    func saveCityWeatherInfo(data: WeatherInfo, filename: String) {
+    func saveCityWeatherInfo(data: WeatherInfo, filename: String) throws {
         print("EXECUTED: saveCityWeatherInfo(data: WeatherInfo, filename: String)")
         let url = cache.appendingPathComponent(filename)
         let encoder = JSONEncoder()
         guard let encodedData = try? encoder.encode(data) else {
-            return
+            throw SaveToCacheError.encodeFailed
         }
         do {
             try encodedData.write(to: url)
             print("SUCCESS: write data to file")
         } catch {
             print("FAILED: write data to file")
+            throw SaveToCacheError.writeToURLFailed
         }
-        
     }
     
     func getCityWeatherInfo(filename: String) -> WeatherInfo? {

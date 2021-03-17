@@ -10,19 +10,22 @@ import Foundation
 class WeatherListModel: ObservableObject {
     @Published var weatherInfoList = [WeatherInfo]()
     
-    func loadFromCache(cities: [City]) {
+    func loadFromCache(cities: [City], success: @escaping ([String: String]) -> ()) {
         weatherInfoList.removeAll()
+        var successDic: [String : String] = [:]
         print("EXECUTED: loadFromCache(cities: [City])")
         var weatherInfoListCopy = [WeatherInfo]()
         for city in cities {
             if let weatherInfo = PersistencyManager.shared.getCityWeatherInfo(filename: FileNamePrefixes.weatherInfo + "\(city.ident)") {
                 weatherInfoListCopy.append(weatherInfo)
+                successDic[weatherInfo.cityName] = "Loaded from Cache"
             } else {
                 
                 let task = WeatherServiceClient().load(city: city, success: { weatherInfo in
                     
                     if !self.weatherInfoList.contains(where: { city in city.cityName == weatherInfo.cityName}) {
                         self.weatherInfoList.append(weatherInfo)
+                        successDic[weatherInfo.cityName] = "Loaded from WebAPI"
                     }
                     print("Success: weatherInfoListCopy count: \(weatherInfoListCopy.count)")
                     print("Success: weatherInfoList count: \(self.weatherInfoList.count)")
@@ -32,12 +35,13 @@ class WeatherListModel: ObservableObject {
         }
         
         weatherInfoList = weatherInfoListCopy
+        success(successDic)
         print("AGAIN: weatherInfoList count: \(weatherInfoList.count)")
         
     }
     
     
-    func load(cities: [City], success: @escaping (Bool) -> ()) {
+    func load(cities: [City], success: @escaping ([String]) -> ()) {
         print("EXECUTED: load(cities: [City], success: @escaping (Bool) -> ())")
         var weatherInfoListCopy = [WeatherInfo]()
         let group = DispatchGroup()
@@ -59,7 +63,8 @@ class WeatherListModel: ObservableObject {
                 city1.cityName > city2.cityName
             })
             print("weatherInfoList.count after loading: \(self.weatherInfoList.count)")
-            success(true)
+            
+            success(self.weatherInfoList.map { info in info.cityName})
         }
     }
     

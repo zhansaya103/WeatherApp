@@ -22,7 +22,9 @@ struct ContentView: View {
         print("ContentView init")
         self.userLocation = userLocation
         let predicate = NSPredicate(format: "isFeatured = %@ OR (longitude = %@ AND latitude = %@)", argumentArray: [true, Double(round(self.userLocation?.longitude ?? 0)), Double(round(self.userLocation?.latitude ?? 0))])
+        
         print("User's location: lat: \(String(describing: Double(round(self.userLocation?.latitude ?? 0)))) lon: \(String(describing: Double(round(self.userLocation?.longitude ?? 0))))")
+        
         let request = City.fetchRequest(predicate: predicate)
         _cities = FetchRequest(fetchRequest: request)
         
@@ -43,7 +45,9 @@ struct ContentView: View {
             weatherListModel.load(cities: cities.map { city in city as City }) { success in
                 print(success)
             }
-            weatherListModel.loadFromCache(cities: cities.map { city in city as City })
+            weatherListModel.loadFromCache(cities: cities.map { city in city as City }) { success in
+                print(success)
+            }
             weatherInfos = weatherListModel.weatherInfoList
             if let weatherInfo = weatherInfos.first {
                 currentCityId = weatherInfo.id
@@ -55,7 +59,9 @@ struct ContentView: View {
         .onChange(of: cities.filter({city in city.isFeatured}), perform: { value in
             print("HAS CHANGED:'isFeatured'")
             print("EXECUTED: weatherListModel.loadFromCache")
-            weatherListModel.loadFromCache(cities: cities.map { city in city as City })
+            weatherListModel.loadFromCache(cities: cities.map { city in city as City }) { success in
+                print(success)
+            }
             print("weatherInfos.count after city.isFeatured had changed: \(weatherInfos.count)")
         })
         .onChange(of: weatherListModel.weatherInfoList.count, perform: { value in
@@ -67,7 +73,9 @@ struct ContentView: View {
             let current = Date().timeIntervalSince1970
             if abs(current - Double(dt)) > 180 {
                 print("HAS CHANGED: weatherListModel.weatherInfoList.first?.current.dt")
-                weatherListModel.loadFromCache(cities: cities.map { city in city as City })
+                weatherListModel.loadFromCache(cities: cities.map { city in city as City }) { success in
+                    print(success)
+                }
             }
         })
         .onChange(of: userLocation?.longitude, perform: { value in

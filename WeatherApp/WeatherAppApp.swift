@@ -52,17 +52,5 @@ struct WeatherAppApp: App {
         print("LOCATION: lat - \(String(describing: locationFetcher.lastKnownLocation?.latitude))")  //MOSCOW: 55.755786   TOKYO: 35.7020691
         print("LOCATION: lon - \(String(describing: locationFetcher.lastKnownLocation?.longitude))") //MOSCOW: 37.617633   TOKYO: 139.7753269
     }
-   /* func getUserLocation() {
-        let locationManager = LocationManager()
-        var lon = 0.0
-        var lat = 0.0
-        if let userLocation = locationManager.lastLocation {
-            lon = userLocation.coordinate.longitude
-            lat = userLocation.coordinate.latitude
-            print("lon: \(lon)")
-            print("lat: \(lat)")
-            UserDefaults.standard.setValue(userLocation, forKey: "userLocation")
-        }
-        
-    } */
+  
 }
