@@ -28,18 +28,19 @@ struct WeatherListView: View {
                             print("currentCityId: \(currentCityId)")
                                 isList.toggle()
                         }) {
-                            HStack(alignment: .center, spacing: geometry.size.width / 6) {
+                            HStack(alignment: .center, spacing: geometry.size.width / 16) {
                                 VStack(alignment: .leading) {
                                     Text(Formatter.setHmm(date: currentDate, seconds: weatherInfo.timezone_offset)).font(Formatter.fontLight20)
                                     Text("\(weatherInfo.cityName)").font(Formatter.fontLight35)
                                 }
-                                .frame(width: geometry.size.width * 1 / 3, height: geometry.size.height / 10, alignment: .leading)
+                                .frame(width: geometry.size.width * 0.45, height: geometry.size.height / 10, alignment: .leading)
+                                
                                 HStack {
                                     Image(systemName: Formatter.setImageName(weatherInfo.current.weather.description.capitalized) )
                                         .renderingMode(.original)
                                         .frame(width: geometry.size.width * 0.20, height: geometry.size.width * 0.20, alignment: .trailing)
                                         .font(Formatter.fontLight35)
-                                    Text(Formatter.setTemp(weatherInfo.current.temp)).font(Formatter.fontLight45)
+                                    Text(Formatter.setTemp(weatherInfo.current.temp)).font(Formatter.fontLight40)
                                         .frame(width: geometry.size.width * 0.20, height: geometry.size.height / 10, alignment: .trailing)
                                 }
                                 

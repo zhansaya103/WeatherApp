@@ -133,7 +133,7 @@ class WeatherAppAsyncTests: XCTestCase {
     }
 
     func test_WeatherListModel_loadFromCache() {
-        let cityInfo = CityInfo(id: 2761369, name: "Vienna", state: "", country: "AT", coord: CityCoordinates(lat: 48.208488, lon: 16.37208))
+        let cityInfo = CityInfo(id: 200020020, name: "Vienna", state: "", country: "AT", coord: CityCoordinates(lat: 48.208488, lon: 16.37208))
         let context = persistanceContainer.viewContext
             
         let city = WeatherApp.City(context: context)
@@ -166,4 +166,6 @@ class WeatherAppAsyncTests: XCTestCase {
         
         wait(for: [promise_successDic_isNotEmpty, promise_successDic_contains_Vienna], timeout: 3)
     }
+    
+    
 }

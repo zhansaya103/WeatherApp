@@ -25,10 +25,12 @@ class WeatherListModel: ObservableObject {
                     
                     if !self.weatherInfoList.contains(where: { city in city.cityName == weatherInfo.cityName}) {
                         self.weatherInfoList.append(weatherInfo)
-                        successDic[weatherInfo.cityName] = "Loaded from WebAPI"
+                        
                     }
                     print("Success: weatherInfoListCopy count: \(weatherInfoListCopy.count)")
                     print("Success: weatherInfoList count: \(self.weatherInfoList.count)")
+                    successDic[weatherInfo.cityName] = "Loaded from WebAPI"
+                    success(successDic)
                 })
                 task.resume()
             }

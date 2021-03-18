@@ -41,19 +41,22 @@ struct ContentView: View {
         }
         .onAppear {
             print("ON APPEAR: ContentView")
+            let dateCurrent = Date().timeIntervalSince1970
             
-            weatherListModel.load(cities: cities.map { city in city as City }) { success in
-                print(success)
-            }
             weatherListModel.loadFromCache(cities: cities.map { city in city as City }) { success in
                 print(success)
+                if weatherListModel.weatherInfoList.count > 0 && weatherListModel.weatherInfoList.contains(where: {wi in abs(Int(dateCurrent) - wi.current.dt) > 60 }) {
+                    weatherListModel.load(cities: cities.map { city in city as City }) { success in
+                        print(success)
+                    }
+                }
             }
             weatherInfos = weatherListModel.weatherInfoList
             if let weatherInfo = weatherInfos.first {
                 currentCityId = weatherInfo.id
             }
             
-            _ = Timer.scheduledTimer(timeInterval: 900, target: weatherListModel, selector: #selector(WeatherListModel.load(timer:)), userInfo: ["cities": cities.map { city in city as City }], repeats: true)
+            _ = Timer.scheduledTimer(timeInterval: 900, target: weatherListModel, selector: #selector(WeatherListModel.load(timer:)), userInfo: ["cities": cities.map { city in city as City }], repeats: true) 
             
         }
         .onChange(of: cities.filter({city in city.isFeatured}), perform: { value in
